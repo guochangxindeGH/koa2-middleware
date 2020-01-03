@@ -11,8 +11,11 @@ const path = require('path')
 const app = new Koa()
 
 
-const index = require('./server/routes/index')
-const user = require('./server/routes/users')
+const indexRouter = require('./server/routes/index')
+const userRouter = require('./server/routes/users')
+
+const indexAPI = new indexRouter().getRouter()
+
 
 // 配置控制台日志中间件
 app.use(koaLogger())
@@ -39,14 +42,24 @@ app.use(async (ctx, next) => {
     console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
+// x-response-time
 app.use(async (ctx, next) => {
-    ctx.body = 'hello koa'
+    const start = Date.now()
+    await next()
+    const ms = Date.now() - start
+    ctx.set('X-Response-Time', `${ms}ms`)
 })
 
+// response
+// app.use(async (ctx, next) => {
+//     ctx.body = 'hello koa'
+// })
 
 
-app.use(index.routes(), index.allowedMethods())
-app.use(user.routes(), user.allowedMethods())
+app.use(indexAPI.routes())
+
+// app.use(indexRouter.routes(), indexRouter.allowedMethods())
+// app.use(userRouter.routes(), userRouter.allowedMethods())
 
 
 
