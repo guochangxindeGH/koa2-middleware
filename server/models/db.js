@@ -27,6 +27,4 @@ mySequelize.sync({
     force: true
 })
 
-module.exports = {
-    mySequelize
-};
+module.exports = mySequelize

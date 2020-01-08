@@ -5,6 +5,7 @@ const koaLogger = require('koa-logger');
 const cors = require('koa2-cors');
 const views = require('koa-views');
 
+const models = require('./server/models/DBConnector')
 
 const path = require('path');
 
