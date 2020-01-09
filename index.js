@@ -5,7 +5,7 @@ const koaLogger = require('koa-logger');
 const cors = require('koa2-cors');
 const views = require('koa-views');
 
-const models = require('./server/models/DBConnector')
+const DBConnector = require('./server/models/DBConnector')
 
 const path = require('path');
 
@@ -17,7 +17,10 @@ const userRouter = require('./server/routes/users');
 
 const indexAPI = new indexRouter().getRouter();
 
-
+(async () => {
+    let conn = DBConnector.getInstance();
+    await conn.initDataModel();
+})();
 
 // 配置跨域
 app.use(async (ctx, next) => {
