@@ -18,7 +18,7 @@ const userRouter = require('./server/routes/users');
 const indexAPI = new indexRouter().getRouter();
 
 (async () => {
-    let conn = DBConnector.getInstance();
+    let conn = await DBConnector.getInstance();
     await conn.initDataModel();
 })();
 

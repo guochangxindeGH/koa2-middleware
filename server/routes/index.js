@@ -1,12 +1,6 @@
 const Router = require('koa-router')
-// const { query } = require('../utils/query')
-const {
-    CREATE_TABLE,
-    INSERT_TABLE,
-    UPDATE_TABLE,
-    DELETE_TABLE
-} = require('../utils/sql')
-const router = new Router();
+const IndexController = require('../controllers/IndexController')
+
 
 // 初始化数据库，创建表
 // query(CREATE_TABLE)
@@ -14,6 +8,7 @@ const router = new Router();
 
 class MyClass {
     constructor() {
+        this.indexController = new IndexController();
         this.router = new Router()
         this.registerPath()
     }
@@ -25,10 +20,12 @@ class MyClass {
             };
             ctx.status = 200;
         })
-        this.router.get('/hello', async (ctx, next) => {
-            ctx.body = {
-                title: 'Hello Koa 2!'
-            }
+        this.router.post('/hello', async (ctx, next) => {
+            const data = ctx.request.body
+            let result = await this.indexController.setUser(data);
+            ctx.response.type = 'json';
+            ctx.status = 200;
+            ctx.body = result
         })
         this.router.get('/string', async (ctx, next) => {
             ctx.response.type = 'text';

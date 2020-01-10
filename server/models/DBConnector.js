@@ -14,7 +14,7 @@ class DBConnector {
      * 数据库连接的单例
      */
     static async getInstance(){
-        if(_instance===null){
+        if(_instance === null){
             _instance = new DBConnector();
             await _instance.processMySql();
         }
@@ -22,17 +22,18 @@ class DBConnector {
     }
     //连接mysql的流程方法
     async processMySql(){
-        await this.initDataModel();
         this.sequelize = db.sequelize;
+        await this.initDataModel();
     }
     async initDataModel() {
-        const article = this.sequelize.import('./article');
+        const article = _instance.sequelize.import('./article');
         article.sync({force: true});
 
         const user = this.sequelize.import('./user');
         user.sync({force: true});
     }
 }
+
 
 
 module.exports = DBConnector;

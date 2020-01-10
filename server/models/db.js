@@ -14,7 +14,7 @@ const sequelize = new Sequelize('gcx','root','12345678',{
     dialectOptions:{
         //字符集
         charset:'utf8mb4',
-        collate:'utf8_general_ci',
+        // collate:'utf8_general_ci',
         supportBigNumbers: true,
         bigNumberStrings: true
     },
