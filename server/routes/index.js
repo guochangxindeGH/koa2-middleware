@@ -20,13 +20,35 @@ class MyClass {
             };
             ctx.status = 200;
         })
-        this.router.post('/hello', async (ctx, next) => {
+        this.router.get('/get_user_data', async (ctx, next) => {
+            const data = ctx.request.body
+            let result = await this.indexController.findUser(data);
+            ctx.response.type = 'json';
+            ctx.status = 200;
+            ctx.body = result
+        })
+        this.router.post('/create_user_data', async (ctx, next) => {
             const data = ctx.request.body
             let result = await this.indexController.setUser(data);
             ctx.response.type = 'json';
             ctx.status = 200;
             ctx.body = result
         })
+        this.router.post('/destroy_user_data', async (ctx, next) => {
+            const data = ctx.request.body
+            let result = await this.indexController.deleteUser(data);
+            ctx.response.type = 'json';
+            ctx.status = 200;
+            ctx.body = result
+        })
+        this.router.post('/update_user_data', async (ctx, next) => {
+            const data = ctx.request.body
+            let result = await this.indexController.updateUser(data);
+            ctx.response.type = 'json';
+            ctx.status = 200;
+            ctx.body = result
+        })
+
         this.router.get('/string', async (ctx, next) => {
             ctx.response.type = 'text';
             ctx.response.body = {
