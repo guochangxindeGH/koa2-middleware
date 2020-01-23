@@ -33,13 +33,15 @@ class IndexController {
             msg: 'success',
             data: datas
         };
-        return result;
+        return result;  
     }
     async deleteUser(data) {
         const dbCon = await DBConnector.getInstance();
         const user = dbCon.sequelize.models.user;
         let datas = await user.destroy({
-            id: data.id
+            where: {
+                id: data.id
+            }
         });
         let result = {
             msg: 'success',
