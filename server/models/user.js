@@ -38,7 +38,7 @@ module.exports = function (sequelize, DataTypes) {
     }, {
         freezeTableName: true, //开启自定义表名
         tableName: 'user',//表名字
-        timestamps: true, // 添加时间戳属性 (updatedAt, createdAt)
+        timestamps: false, // 添加时间戳属性 (updatedAt, createdAt)
         // createdAt: 'createDate',// 将createdAt字段改个名
         // updatedAt: 'updateDate',// 将updatedAt字段改个名
         // indexes: [{ // 索引

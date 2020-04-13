@@ -1,6 +1,6 @@
 const DBConnector = require('../models/DBConnector')
 
-class IndexController {
+class UserController {
     constructor() {
 
     }
@@ -33,7 +33,7 @@ class IndexController {
             msg: 'success',
             data: datas
         };
-        return result;  
+        return result;
     }
     async deleteUser(data) {
         const dbCon = await DBConnector.getInstance();
@@ -72,4 +72,4 @@ class IndexController {
     }
 }
 
-module.exports = IndexController;
+module.exports = UserController;

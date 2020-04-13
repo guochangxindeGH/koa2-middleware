@@ -1,14 +1,12 @@
 const Router = require('koa-router')
-const IndexController = require('../controllers/IndexController')
+const UserController = require('../controllers/UserController')
 
 
-// 初始化数据库，创建表
-// query(CREATE_TABLE)
+
 // 装载所有子路由
-
 class MyClass {
     constructor() {
-        this.indexController = new IndexController();
+        this.indexController = new UserController();
         this.router = new Router()
         this.registerPath()
     }

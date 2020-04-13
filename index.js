@@ -12,14 +12,13 @@ const path = require('path');
 const app = new Koa()
 
 
-const indexRouter = require('./server/routes/index');
-const userRouter = require('./server/routes/users');
+const userRouter = require('./server/routes/UserRouter');
 
-const indexAPI = new indexRouter().getRouter();
+const indexAPI = new userRouter().getRouter();
 
 (async () => {
     let conn = await DBConnector.getInstance();
-    await conn.initDataModel();
+    // await conn.initDataModel();
 })();
 
 // 配置跨域
@@ -47,7 +46,6 @@ app.use(cors());
 app.use(koaStatic(
     path.join(__dirname , './../static')
 ));
-
 // 配置服务端模板渲染引擎中间件
 app.use(views(path.join(__dirname, './views'), {
     extension: 'ejs'
