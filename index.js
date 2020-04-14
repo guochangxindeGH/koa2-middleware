@@ -4,6 +4,7 @@ const bodyParser = require('koa-bodyparser');
 const koaLogger = require('koa-logger');
 const cors = require('koa2-cors');
 const views = require('koa-views');
+const router = require('koa-router')();
 
 const DBConnector = require('./server/models/DBConnector')
 
@@ -13,12 +14,27 @@ const app = new Koa()
 
 
 const userRouter = require('./server/routes/UserRouter');
+const articleRouter = require('./server/routes/ArticleRouter');
 
-const indexAPI = new userRouter().getRouter();
+const UserAPI = new userRouter().getRouter();
+const ArticleAPI = new articleRouter().getRouter();
 
 (async () => {
     let conn = await DBConnector.getInstance();
     // await conn.initDataModel();
+
+    // 使用表单解析中间件
+    app.use(bodyParser({
+        enableTypes:['json', 'form', 'text']
+    }));
+
+
+
+    router.use('/user', UserAPI.routes());
+    router.use('/article', ArticleAPI.routes());
+
+    app.use(router.routes()).use(router.allowedMethods())
+
 })();
 
 // 配置跨域
@@ -33,11 +49,6 @@ app.use(async (ctx, next) => {
 
 // 配置控制台日志中间件
 app.use(koaLogger());
-
-// 使用表单解析中间件
-app.use(bodyParser({
-    enableTypes:['json', 'form', 'text']
-}));
 
 //使用跨域
 app.use(cors());
@@ -66,20 +77,6 @@ app.use(async (ctx, next) => {
     const ms = Date.now() - start
     ctx.set('X-Response-Time', `${ms}ms`)
 });
-
-// response
-// app.use(async (ctx, next) => {
-//     ctx.body = 'hello koa'
-// })
-
-
-app.use(indexAPI.routes(), indexAPI.allowedMethods());
-// app.use(indexAPI.allowedMethods())
-
-// app.use(indexRouter.routes(), indexRouter.allowedMethods())
-// app.use(userRouter.routes(), userRouter.allowedMethods())
-
-
 
 // error-handling
 app.on('error', (err, ctx) => {

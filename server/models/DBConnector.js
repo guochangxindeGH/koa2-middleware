@@ -36,10 +36,10 @@ class DBConnector {
     }
 
     async initDataModel(is_force = false) {
-        const article = _instance.sequelize.import('./article');
+        const article = _instance.sequelize.import('./t_article');
         article.sync({force: is_force});
 
-        const user = this.sequelize.import('./user');
+        const user = this.sequelize.import('./t_user');
         user.sync({force: is_force});
 
         console.log('数据库初始化完毕');

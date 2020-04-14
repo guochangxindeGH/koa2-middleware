@@ -2,34 +2,37 @@
 module.exports = function (sequelize, DataTypes) {
     return sequelize.define('user', {
         id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER(20),
             primaryKey: true,
             allowNull: false,
             autoIncrement: true
         },
         firstName: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(50),
+            allowNull: true,
             field: 'firstName'
         },
         lastName: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(50),
+            allowNull: true,
             field: 'lastName'
         },
         age: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER(5),
+            allowNull: true,
             field: 'age'
         },
         email: { //邮箱
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true, //唯一
+            type: DataTypes.STRING(50),
+            allowNull: true,
+            unique: false, //唯一
             validate: {//设置验证条件
                 isEmail: true,// 检测邮箱格式 (foo@bar.com)
             },
         },
         password: { //密码
-            type: DataTypes.STRING,
-            allowNull: false,
+            type: DataTypes.STRING(20),
+            allowNull: true,
         },
         state: { //状态 0未激活邮箱、1已激活邮箱
             type: DataTypes.STRING(2),//限制字符个数
@@ -37,7 +40,7 @@ module.exports = function (sequelize, DataTypes) {
         },
     }, {
         freezeTableName: true, //开启自定义表名
-        tableName: 'user',//表名字
+        tableName: 't_user',//表名字
         timestamps: false, // 添加时间戳属性 (updatedAt, createdAt)
         // createdAt: 'createDate',// 将createdAt字段改个名
         // updatedAt: 'updateDate',// 将updatedAt字段改个名

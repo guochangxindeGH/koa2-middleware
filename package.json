@@ -2,11 +2,24 @@
   "name": "koa2-middleware",
   "version": "1.0.0",
   "description": "first koa2 project",
+  "bin": "index.js",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node-dev index.js"
+    "dev": "node-dev index.js",
+    "build-mac": "pkg . --target=node10-macos-x64"
+  },
+  "pkg": {
+    "assets": [
+      "Config.json",
+      "log.json",
+      "static/**/*"
+    ],
+    "scripts": [
+      "index.js",
+      "server/**/*.js"
+    ]
   },
   "author": "",
   "license": "ISC",
@@ -20,10 +33,14 @@
     "koa2-cors": "^2.0.6",
     "mysql": "^2.17.1",
     "mysql2": "^2.1.0",
+    "commander": "^5.0.0",
     "sequelize": "^5.21.3"
   },
   "devDependencies": {
+    "eslint": "^6.8.0",
     "gulp": "^4.0.2",
-    "node-dev": "^4.0.0"
+    "mocha": "^7.1.1",
+    "node-dev": "^4.0.0",
+    "pkg": "^4.4.7"
   }
 }

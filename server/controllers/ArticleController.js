@@ -1,25 +1,25 @@
 const DBConnector = require('../models/DBConnector')
 
-class UserController {
+class ArticleController {
     constructor() {
 
     }
-    async findUser(id) {
+    async findArticle(data) {
         const dbCon = await DBConnector.getInstance();
-        const user = dbCon.sequelize.models.user;
+        const user = dbCon.sequelize.models.article;
         // const wsa = dbCon.models.get('user');
-        let data = await user.findAll({
-            id: id,
+        let datas = await user.findAll({
+            id: data,
         });
         let result = {
             msg: 'success',
-            data: data
+            data: datas
         };
         return result;
     }
-    async updateOrSetUser(data) {
+    async updateOrSetArticle(data) {
         const dbCon = await DBConnector.getInstance();
-        let user = dbCon.sequelize.models.user;
+        let user = dbCon.sequelize.models.article;
         const one = await user.findOne({
             where: {
                 id: data.id
@@ -31,9 +31,9 @@ class UserController {
             return await user.create(data);
         }
     }
-    async deleteUser(data) {
+    async deleteArticle(data) {
         const dbCon = await DBConnector.getInstance();
-        const user = dbCon.sequelize.models.user;
+        const user = dbCon.sequelize.models.article;
         let datas = await user.destroy({
             where: {
                 id: data.id
@@ -47,4 +47,4 @@ class UserController {
     }
 }
 
-module.exports = UserController;
+module.exports = ArticleController;
