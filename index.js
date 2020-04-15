@@ -9,9 +9,12 @@ const router = require('koa-router')();
 const DBConnector = require('./server/models/DBConnector')
 
 const path = require('path');
-
 const app = new Koa()
-
+const { program } = require('commander');
+const versionString='0.0.1';
+program
+    .version(`中间件版本号 : ${versionString}`, '-v, --version')
+    .parse(process.argv);
 
 const userRouter = require('./server/routes/UserRouter');
 const articleRouter = require('./server/routes/ArticleRouter');

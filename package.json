@@ -5,10 +5,10 @@
   "bin": "index.js",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node-dev index.js",
-    "build-mac": "pkg . --target=node10-macos-x64"
+    "start": "npx node index.js",
+    "test": "npx mocha",
+    "dev": "npx node-dev index.js",
+    "buid-mac": "npx pkg . --target=node10-macos-x64"
   },
   "pkg": {
     "assets": [
@@ -38,9 +38,13 @@
   },
   "devDependencies": {
     "eslint": "^6.8.0",
+    "eslint-plugin-vue": "^6.2.2",
     "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-uglify": "^3.0.2",
     "mocha": "^7.1.1",
     "node-dev": "^4.0.0",
-    "pkg": "^4.4.7"
+    "pkg": "^4.4.7",
+    "supertest": "^4.0.2"
   }
 }

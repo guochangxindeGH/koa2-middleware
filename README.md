@@ -46,3 +46,13 @@
 ` koa2-cors`
 
 > 是为了解决跨域问题
+
+` npx`
+
+> 调用当前项目目录下的node_modules的插件，如果没有就调用全局安装的node_modules下的插件
+
+
+### 相关命令
+
+- 启动中间件：  `npm run dev 或者 npm run start`
+- 打包后查看包版本： `./koa2-middleware -v`
